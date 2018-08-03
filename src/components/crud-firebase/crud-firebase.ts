@@ -180,14 +180,6 @@ export class CrudFirebaseComponent implements OnInit {
     });
 
 
-// Same as the previous example, except we will also log a message
-// when the data has finished synchronizing.
-    //messageListRef.push({ value: "0398.F091/6", quantity: 1 });
-    /*newMessageRef.set({
-      'user_id': 'ada',
-      'text': 'The Analytical Engine weaves algebraical patterns just as the Jacquard loom weaves flowers and leaves.'
-    });*/
-    //this.items.set(this.itemRef,{ value: "0398.F091/6", quantity: 1 });
   }
   
   toggleDone(item: any): void {
