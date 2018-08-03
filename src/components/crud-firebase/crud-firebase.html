@@ -1,0 +1,48 @@
+<!-- Generated template for the CrudFirebaseComponent component -->
+<div>
+  {{text}}
+  <!--<ul>
+    <li *ngFor="let item of items | async">
+      {{ item | json}}
+    </li>
+  </ul> -->
+  <button ion-button color="light" (click)="additem('0303hhh',1)" >Add</button>
+  <button ion-button  (click)="toggleDone(item)">toggle</button>
+  <button ion-button (click)="updateitem(item,'resalut')" color="secondary">update</button>
+  <button ion-button (click)="deleteitem(item)" color="danger">delete</button>
+  <button ion-button   (click)="inFormation()" color="dark">info</button>
+
+  <form [formGroup]="documentsForm">
+      <ion-list>
+
+        <ion-item>
+          <ion-label>Nom</ion-label>
+          <ion-input [formControl]="documentsForm.controls['name']" type="text"></ion-input>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label>quantité</ion-label>
+          <ion-input [formControl]="documentsForm.controls['quantity']" type="number"></ion-input>
+        </ion-item>
+      
+      </ion-list>
+      
+      <div padding>
+        <button block  (click)="additem(this.documentsForm.controls.name.value,this.documentsForm.controls.quantity.value)">Add items</button>
+      </div>
+  </form>
+<!--<ul>
+    <li *ngFor="let data of datas">
+      {{ data }}
+  </li>
+    
+
+</ul> -->
+
+{{ datas | json }}
+
+
+  
+  
+  
+</div>

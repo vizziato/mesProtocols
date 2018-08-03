@@ -1,0 +1,56 @@
+<!-- Generated template for the AuthComponent component -->
+<div>
+  {{text}}
+  <h1 *ngIf="authService.user | async">Welcome {{ (authService.user | async)?.email }}!</h1>
+
+  <div *ngIf="!(authService.user | async)">
+    <input type="text" [(ngModel)]="email" placeholder="email">
+    <input type="password" [(ngModel)]="password" placeholder="password">
+
+    <button (click)="signup()" [disabled]="!email || !password">
+      Signup
+    </button>
+
+    <button (click)="login()" [disabled]="!email || !password">
+      Login
+    </button>
+  </div>
+
+  <button (click)="logout()" *ngIf="authService.user | async">
+    Logout
+  </button>
+
+
+  <form [formGroup]="credentialsForm">
+
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input [formControl]="credentialsForm.controls['email']"
+          type="email"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input [formControl]="credentialsForm.controls['password']"
+          type="password"></ion-input>
+    </ion-item>      
+  
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button block color="secondary" (click)="onSignIn()">
+          Sign in
+        </button>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row>
+      <ion-col text-center>
+        <button ion-button clear color="light" (click)="onForgotPassword()">
+          Forgot your password?
+        </button>
+      </ion-col>
+    </ion-row>
+  
+  </form>
+  
+</div>
