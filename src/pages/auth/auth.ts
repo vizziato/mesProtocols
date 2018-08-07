@@ -16,7 +16,12 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class AuthPage {
 
+  titlePage: string;
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.titlePage = "Autentification";
+    
   }
 
   ionViewDidLoad() {

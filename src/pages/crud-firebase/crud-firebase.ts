@@ -15,7 +15,12 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class CrudFirebasePage {
 
+  titlePage: string;
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+    this.titlePage = "Firebase";
   }
 
   ionViewDidLoad() {

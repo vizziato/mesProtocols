@@ -1,0 +1,23 @@
+<!-- Generated template for the HeaderComponent component -->
+<ion-header>
+    <ion-toolbar color="dark">
+            <ion-buttons start>
+                    <button ion-button left menuToggle >
+                        <ion-icon  *ngIf="currentUser?.email" name="menu"></ion-icon>
+                    </button>
+            </ion-buttons>
+            <ion-title color="light">{{titlePage}}</ion-title>
+            <ion-buttons *ngIf="currentUser?.email" end>
+                <button ion-button icon-end color="light">
+                <p >{{ currentUser?.email}}</p>
+                <ion-icon name="person"></ion-icon>
+                </button>
+            </ion-buttons>
+            <ion-buttons end>
+                <button ion-button icon-end color="light" (click)=" openPage() ">
+                <ion-icon name="settings"></ion-icon>
+                </button>
+            </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+

@@ -1,0 +1,21 @@
+footer {
+     
+    
+
+    @media screen and (max-width: 720px) {
+       
+        .toolbar-ios p {
+            font-size:1.0em;
+        }
+    }
+
+    @media screen and (max-width: 420px) {
+       
+        .toolbar-title-ios {
+            font-size:1.2em;
+        }
+        .toolbar-ios p {
+            font-size:0.7em;
+        }
+    }
+}

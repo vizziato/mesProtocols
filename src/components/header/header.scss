@@ -1,0 +1,32 @@
+header {
+    .toolbar-ios p {
+        font-size:1.4em;
+    }
+
+    .toolbar-ios ion-title {
+        padding: 0 90px 1px;
+    }
+
+    @media screen and (max-width: 720px) {
+        .toolbar-ios ion-title {
+            padding: 0 50px 1px;
+        }
+        .toolbar-ios p {
+            font-size:1.0em;
+        }
+    }
+
+    @media screen and (max-width: 420px) {
+        .toolbar-ios ion-title {
+            padding: 0 50px 1px;
+           
+        }
+        .toolbar-title-ios {
+            font-size:1.2em;
+        }
+        .toolbar-ios p {
+            font-size:0.7em;
+        }
+
+    }
+}

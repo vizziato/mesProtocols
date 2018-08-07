@@ -142,15 +142,6 @@ export class CrudFirebaseComponent implements OnInit {
 
     }
 
-    onSignIn() {
-      console.log('SignInPage: onSignIn()',this.credentialsForm );
-    }
-  
-    onForgotPassword() {
-      console.log('SignInPage: onForgotPassword()',this.credentialsForm );
-    }
-
-   
   
   inFormation()
   {

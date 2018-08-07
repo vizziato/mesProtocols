@@ -17,6 +17,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import {AuthComponent } from '../components/auth/auth'
 import {CrudFirebaseComponent} from '../components/crud-firebase/crud-firebase'
+import {FooterComponent} from '../components/footer/footer';
+import {HeaderComponent} from '../components/header/header'
 
 //AngularFire2 -- Start
 // ...
@@ -38,7 +40,9 @@ import { AuthProvider } from '../providers/auth/auth';
     ListPage,
     AuthComponent,
     CrudFirebaseComponent,
-    CrudFirebasePage
+    CrudFirebasePage,
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,9 @@ import { AuthProvider } from '../providers/auth/auth';
     AuthPage,
     AuthComponent,
     CrudFirebaseComponent,
-    CrudFirebasePage
+    CrudFirebasePage,
+    FooterComponent,
+    HeaderComponent
 
   ],
   providers: [
