@@ -6,41 +6,56 @@
       {{ item | json}}
     </li>
   </ul> -->
-  <button ion-button color="light" (click)="additem('0303hhh',1)" >Add</button>
-  <button ion-button  (click)="toggleDone(item)">toggle</button>
-  <button ion-button (click)="updateitem(item,'resalut')" color="secondary">update</button>
-  <button ion-button (click)="deleteitem(item)" color="danger">delete</button>
-  <button ion-button   (click)="inFormation()" color="dark">info</button>
-
-  <form [formGroup]="documentsForm">
-      <ion-list>
+  
 
         <ion-item>
-          <ion-label>Nom</ion-label>
-          <ion-input [formControl]="documentsForm.controls['name']" type="text"></ion-input>
+                <ion-label floating>Nom</ion-label>
+                <ion-input [(ngModel)]="item.name" placeholder="name"
+                    type="text"></ion-input>
         </ion-item>
-      
+          
         <ion-item>
-          <ion-label>quantité</ion-label>
-          <ion-input [formControl]="documentsForm.controls['quantity']" type="number"></ion-input>
-        </ion-item>
+          <ion-label floating>Quantity</ion-label>
+          <ion-input [(ngModel)]="item.quantity" placeholder="number"
+              type="number"></ion-input>
+        </ion-item>      
+  
+       
+  <ion-row>
+      <ion-col text-center>
+        <button ion-button block color="light" (click)="addItem(item.name,item.quantity)" >Add</button>
+        <button ion-button block color="default" (click)="addItem(item.name,item.quantity)" >Push</button>
+        <button ion-button  (click)="toggleDone(item)">toggle</button>
+        <button ion-button (click)="updateitem(item,'resalut')" color="secondary">update</button>
+        <button ion-button (click)="deleteitem(item)" color="danger">delete</button>
+        <button ion-button   (click)="inFormation()" color="dark">info</button>
+      </ion-col>
+    </ion-row>
+  <!--<ul>
+      <li *ngFor="let item of items">
+        {{ item }}
+      </li>
       
-      </ion-list>
-      
-      <div padding>
-        <button block  (click)="additem(this.documentsForm.controls.name.value,this.documentsForm.controls.quantity.value)">Add items</button>
-      </div>
-  </form>
-<!--<ul>
-    <li *ngFor="let data of datas">
-      {{ data }}
-  </li>
-    
+  
+  </ul> -->
+  
+{{ item | json }}
 
-</ul> -->
 
-{{ datas | json }}
+ <!--<ion-buttons end>
+    <button ion-button icon-only (click)="addSong()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+</ion-buttons>
 
+<ion-list>
+      <ion-item *ngFor="let song of songs">
+        {{song.title}}
+      </ion-item>
+</ion-list>
+
+<ion-item *ngFor="let song of songs" (click)="showOptions(song.id, song.title)"></ion-item>-->
+  
 
   
   

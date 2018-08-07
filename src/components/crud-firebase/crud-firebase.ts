@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 //import { Observable } from 'rxjs/Observable';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
-import { AngularFireDatabase, AngularFireList} from 'angularfire2/database';
-
+import { AngularFireDatabase, AngularFireList, snapshotChanges} from 'angularfire2/database';
+import {AlertController,ActionSheetController} from 'ionic-angular'
+import { query } from '../../../node_modules/@angular/core/src/render3/instructions';
 
 
 /**
@@ -23,6 +24,9 @@ export class CrudFirebaseComponent implements OnInit {
  itemValue:any[];
  items :AngularFireList<any>;
 
+ songs: AngularFireList<any>;
+ songsRef:AngularFireList<any>;
+
  rootRef:AngularFireList<any>; 
  documentsRef:AngularFireList<any>;
  documentsQuery:any;
@@ -37,10 +41,15 @@ export class CrudFirebaseComponent implements OnInit {
 
   datas: any;
 
+  item:any;
+
+  songsItem:any;
+
 
  
 
-  constructor(private af: AngularFireDatabase, private formBuilder:FormBuilder) {
+  constructor(private af: AngularFireDatabase, private formBuilder:FormBuilder,public alertCtrl: AlertController,
+    public actionSheetCtrl: ActionSheetController) {
     console.log('Hello CrudFirebaseComponent Component');
 
     let that = this;
@@ -61,14 +70,40 @@ export class CrudFirebaseComponent implements OnInit {
       name: ['haloo'],
       quantity: 0
     });
+
+    this.item =({
+      name: ['test'],
+      quantity: 0
+    });
   
    console.log('this.documentsForm',this.documentsForm.controls.name.value);
 
-  }
+    this.af.list('/songs').query.on("child_added",function(snapshot) {
+    // This will be called exactly two times (unless there are less than two
+    // dinosaurs in the Database).
+  
+    // It will also get fired again if one of the first two dinosaurs is
+    // removed from the data set, as a new dinosaur will now be the second
+    // shortest.
+    //that.songs.snapshotChanges. = snapshot.key
+    console.log('child_added songs snapshot.key',snapshot);
 
+    console.log('child_added songs snapshot.key',snapshot.key);
+  });
+
+}
 
   ngOnInit(){
     this.items = this.af.list(this.itemsRef)
+    this.songs = this.af.list('/songs');
+
+    this.songsRef = this.af.list('/songs');
+    // Use snapshotChanges().map() to store the key
+    this.songsItem = this.songsRef.snapshotChanges().map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    });
+
+   
 
     
     
@@ -142,15 +177,112 @@ export class CrudFirebaseComponent implements OnInit {
 
     }
 
+    addSong(){
+      let prompt = this.alertCtrl.create({
+        title: 'Song Name',
+        message: "Enter a name for this new song you're so keen on adding",
+        inputs: [
+          {
+            name: 'title',
+            placeholder: 'Title'
+          },
+        ],
+        buttons: [
+          {
+            text: 'Cancel',
+            handler: data => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Save',
+            handler: data => {
+              const newSongRef = this.songs.push({});
+             //this.af.list(this.itemRef).push({name: name, quantity: quantity });
+              newSongRef.set({
+                id: newSongRef.key,
+                title: data.title
+              });
+            }
+          }
+        ]
+      });
+      prompt.present();
+    }
+
+    showOptions(songId, songTitle) {
+      let actionSheet = this.actionSheetCtrl.create({
+        title: 'What do you want to do?',
+        buttons: [
+          {
+            text: 'Delete Song',
+            role: 'destructive',
+            handler: () => {
+              this.removeSong(songId);
+            }
+          },{
+            text: 'Update title',
+            handler: () => {
+              this.updateSong(songId, songTitle);
+            }
+          },{
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          }
+        ]
+      });
+      actionSheet.present();
+    }
+
+    removeSong(songId: string){
+      this.songs.remove(songId);
+    }
+
+    updateSong(songId, songTitle){
+      let prompt = this.alertCtrl.create({
+        title: 'Song Name',
+        message: "Update the name for this song",
+        inputs: [
+          {
+            name: 'title',
+            placeholder: 'Title',
+            value: songTitle
+          },
+        ],
+        buttons: [
+          {
+            text: 'Cancel',
+            handler: data => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Save',
+            handler: data => {
+              this.songs.update(songId, {
+                title: data.title
+              });
+            }
+          }
+        ]
+      });
+      prompt.present();
+    }
+    
+
   
-  inFormation()
+  pushItem(name,quantity) :void
   {
-    //this.af.list('/items').push({content: this.itemValue});
+    let count;
+    this.af.list(this.itemRef+count).push({name: name, quantity: quantity });
+    //this.items.push({name: name, quantity: quantity });
     //this.itemValue ='';
-    console.info('child_changed',this.items.valueChanges(['child_changed']))
-    console.info('child_added',this.items.valueChanges(['child_added']).map(result => console.log('chnged')));
+    
   }
-  additem(name,quantity): void {
+  addItem(name,quantity): void {
     //var messageListRef = this.documentsRef;
     let that = this;
     this.items.set(this.itemRef,{ name: name, quantity: quantity })

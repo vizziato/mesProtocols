@@ -21,10 +21,12 @@ export class CrudFirebasePage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
     this.titlePage = "Firebase";
+   
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CrudFirebasePage');
+    
   }
 
 }
