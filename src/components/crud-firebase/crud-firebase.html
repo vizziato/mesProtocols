@@ -42,19 +42,27 @@
 {{ item | json }}
 
 
- <!--<ion-buttons end>
+<ion-buttons end>
     <button ion-button icon-only (click)="addSong()">
       <ion-icon name="add"></ion-icon>
     </button>
 </ion-buttons>
 
+
+
+{{ songsItem | json }}
+
+
+
+
+
 <ion-list>
-      <ion-item *ngFor="let song of songs">
+      <ion-item *ngFor="let song of songsItem">
         {{song.title}}
       </ion-item>
 </ion-list>
 
-<ion-item *ngFor="let song of songs" (click)="showOptions(song.id, song.title)"></ion-item>-->
+<!--<ion-item *ngFor="let song of songsItem | json" (click)="showOptions(song.id, song.title)"></ion-item>-->
   
 
   
